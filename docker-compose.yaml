@@ -1,0 +1,29 @@
+version: '3.2'
+services:
+  php:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always  
+    container_name: s360-app
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:80"
+    env_file: .env.dev
+    privileged: true
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+
+  pg:
+    image: postgres:13
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data/pgdata:rw
+    env_file: .env.dev
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
