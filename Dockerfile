@@ -38,7 +38,5 @@ COPY docker-config/nginx.conf /etc/nginx/nginx.conf
 COPY docker-config/redis.conf /etc/redis/redis.conf
 
 RUN chown www-data:www-data -R /app 
-RUN php composer.phar install
-RUN php artisan key:generate
 
 CMD ["/usr/bin/supervisord","-c","/etc/supervisor/supervisord.conf"]
